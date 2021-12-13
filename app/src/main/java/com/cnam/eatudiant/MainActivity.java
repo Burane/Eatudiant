@@ -3,6 +3,8 @@ package com.cnam.eatudiant;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.cnam.eatudiant.ui.login.LoginActivity;
