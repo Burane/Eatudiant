@@ -1,10 +1,11 @@
 package com.cnam.eatudiant;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
@@ -19,7 +20,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int SPLASH_SCREEN_DELAY = 3000;
+    private final int SPLASH_SCREEN_DELAY = 5000;
 
     Animation topAnim;
     Animation bottomAnim;
@@ -57,7 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+
+            Pair[] pairs = new Pair[2];
+            pairs[0] = new Pair<View, String>(logo, "logo");
+            pairs[1] = new Pair<View, String>(title, "title");
+
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, pairs);
+
+            startActivity(intent, options.toBundle());
             finish();
         }, SPLASH_SCREEN_DELAY);
     }
