@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.model;
+package com.cnam.eatudiant.data;
 
 
 import lombok.Data;

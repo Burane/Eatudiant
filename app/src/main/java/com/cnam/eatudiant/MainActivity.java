@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.cnam.eatudiant.view.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
