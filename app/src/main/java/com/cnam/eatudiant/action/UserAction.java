@@ -1,5 +1,7 @@
 package com.cnam.eatudiant.action;
 
+import android.content.Context;
+import android.util.Log;
 import com.cnam.eatudiant.data.UserAuth;
 import com.cnam.eatudiant.store.UserStore;
 import com.cnam.eatudiant.view.View;
@@ -11,13 +13,17 @@ public class UserAction {
     private Map<String, Observable> actions;
     private UserStore userStore;
 
-    UserAction(View userView) {
+    public UserAction(View userView) {
         actions = userView.getActions();
-        userStore = new UserStore(userView.getConsumers());
+        userStore = new UserStore(userView.getConsumers(), userView.getContext());
     }
 
     @SuppressWarnings("unchecked")
     public void start() {
-        actions.get("login").subscribe(next -> userStore.login());
+        actions.get("login").subscribe(next -> {
+            Log.i("eatudiant_debug", next.toString());
+
+            userStore.login();
+        });
     }
 }

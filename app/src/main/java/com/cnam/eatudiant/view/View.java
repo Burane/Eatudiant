@@ -1,5 +1,6 @@
 package com.cnam.eatudiant.view;
 
+import android.content.Context;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
@@ -10,4 +11,6 @@ public interface View {
     Map<String, Observable> getActions();
 
     Map<String, Consumer> getConsumers();
+
+    Context getContext();
 }

@@ -1,24 +1,34 @@
 package com.cnam.eatudiant.store;
 
+import android.content.Context;
 import android.util.Log;
-import com.cnam.eatudiant.data.User;
-import com.cnam.eatudiant.data.UserAuth;
+import com.cnam.eatudiant.api.RxApiClient;
+import com.cnam.eatudiant.api.RxApiService;
 import io.reactivex.rxjava3.functions.Consumer;
+import lombok.SneakyThrows;
 
 import java.util.Map;
 
-public class UserStore extends Store {
+public class UserStore {
 
-    private User user;
+    private Map<String, Consumer> consumer;
 
-    public UserStore(Map<String, Consumer> consumer) {
-        super(consumer);
-        this.user = null;
+    private RxApiService rxApiService;
+    private Context context;
+
+    public UserStore(Map<String, Consumer> consumer, Context context) {
+        this.consumer = consumer;
     }
 
+    @SneakyThrows
     public void login() {
-        Log.i("eatudiant", "login: ");
-        getAction("login").accept(user);
+        Log.i("eatudiant_debug", "login: ");
+
+        rxApiService = RxApiClient.getRxApiService(context);
+
+        rxApiService.login()
+
+        consumer.get("login_response").accept();
     }
 
 }

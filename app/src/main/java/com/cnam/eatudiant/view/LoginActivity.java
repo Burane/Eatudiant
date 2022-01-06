@@ -1,10 +1,14 @@
 package com.cnam.eatudiant.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
+import com.cnam.eatudiant.action.UserAction;
 import com.cnam.eatudiant.data.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.rxbinding4.view.RxView;
@@ -23,6 +27,9 @@ public class LoginActivity extends AppCompatActivity implements View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+
+        new UserAction(this).start();
     }
 
     @Override
@@ -36,5 +43,10 @@ public class LoginActivity extends AppCompatActivity implements View {
     public Map<String, Consumer> getConsumers() {
         Map<String, Consumer> consumers = new HashMap<>();
         return consumers;
+    }
+
+    @Override
+    public Context getContext() {
+        return this.getContext();
     }
 }
