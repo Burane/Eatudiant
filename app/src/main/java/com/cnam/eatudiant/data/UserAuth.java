@@ -1,10 +1,11 @@
 package com.cnam.eatudiant.data;
 
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 public class UserAuth {
 
-    private String username;
-    private String password;
+    @NonNull private String username;
+    @NonNull private String password;
 }

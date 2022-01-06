@@ -11,7 +11,9 @@ import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.action.UserAction;
 import com.cnam.eatudiant.data.User;
 import com.google.android.material.textfield.TextInputEditText;
+import com.jakewharton.rxbinding4.material.RxTabLayout;
 import com.jakewharton.rxbinding4.view.RxView;
+import com.jakewharton.rxbinding4.widget.RxTextView;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
@@ -22,6 +24,12 @@ public class LoginActivity extends AppCompatActivity implements View {
 
     @BindView(R.id.login_button)
     Button loginButton;
+
+    @BindView(R.id.input_password)
+    TextInputEditText password;
+
+    @BindView(R.id.input_username)
+    TextInputEditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View {
     @Override
     public Map<String, Observable> getActions() {
         Map<String, Observable> actions = new HashMap<>();
-        actions.put("login", RxView.clicks(loginButton));
+        actions.put("loginPressed", RxView.clicks(loginButton));
+        actions.put("usernameChanged", RxTextView.textChanges(username));
+        actions.put("passwordChanged", RxTextView.textChanges(password));
         return actions;
     }
 
@@ -47,6 +57,6 @@ public class LoginActivity extends AppCompatActivity implements View {
 
     @Override
     public Context getContext() {
-        return this.getContext();
+        return this.getApplicationContext();
     }
 }

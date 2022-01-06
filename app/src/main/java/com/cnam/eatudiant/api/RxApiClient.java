@@ -14,7 +14,7 @@ public class RxApiClient {
 
     private RxApiClient(Context context) {
         retrofit = new Retrofit.Builder()
-                .baseUrl("localhost:3000")
+                .baseUrl("http://localhost:3000")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.createAsync())
                 .client(HttpClient.getHttpClient(context))

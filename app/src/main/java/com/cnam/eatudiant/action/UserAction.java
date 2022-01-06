@@ -20,10 +20,22 @@ public class UserAction {
 
     @SuppressWarnings("unchecked")
     public void start() {
-        actions.get("login").subscribe(next -> {
+        actions.get("loginPressed").subscribe(next -> {
             Log.i("eatudiant_debug", next.toString());
 
             userStore.login();
+        });
+
+        actions.get("usernameChanged").subscribe(next -> {
+            Log.i("eatudiant_debug", next.toString());
+
+            userStore.setUsername(next.toString());
+        });
+
+        actions.get("passwordChanged").subscribe(next -> {
+            Log.i("eatudiant_debug", next.toString());
+
+            userStore.setPassword(next.toString());
         });
     }
 }
