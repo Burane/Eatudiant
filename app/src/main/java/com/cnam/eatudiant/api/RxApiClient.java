@@ -14,17 +14,17 @@ public class RxApiClient {
 
     private RxApiClient(Context context) {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:3000")
+                .baseUrl("https://jsonplaceholder.typicode.com")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.createAsync())
                 .client(HttpClient.getHttpClient(context))
                 .build();
     }
 
-    public static RxApiService getRxApiService(Context context) {
+    public static RxUserApiService getRxApiService(Context context) {
         if (instance == null) {
             instance = new RxApiClient(context);
         }
-        return instance.retrofit.create(RxApiService.class);
+        return instance.retrofit.create(RxUserApiService.class);
     }
 }
