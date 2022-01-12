@@ -36,7 +36,9 @@ captures/
 
 # IntelliJ
 *.iml
-/.idea
+/.idea/**
+.idea/
+.idea
 .idea/misc.xml
 
 # Keystore files

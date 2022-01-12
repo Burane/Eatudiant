@@ -16,6 +16,10 @@
                 android:exported="true"
                 android:label="@string/title_activity_login"/>
         <activity
+                android:name=".view.RegisterActivity"
+                android:exported="true"
+                android:label="@string/title_activity_register"/>
+        <activity
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>
