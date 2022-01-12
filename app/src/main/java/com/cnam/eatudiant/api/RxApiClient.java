@@ -14,7 +14,7 @@ public class RxApiClient {
 
     private RxApiClient(Context context) {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
+                .baseUrl(Config.API_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.createAsync())
                 .client(HttpClient.getHttpClient(context))
