@@ -16,11 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.cnam.eatudiant.view.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int SPLASH_SCREEN_DELAY = 5000;
+    private final int SPLASH_SCREEN_DELAY = 500;
 
     Animation topAnim;
     Animation bottomAnim;
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN
             );
         }
+
+
+        // check if authToken is in shared pref
+        // if yes login and go to homeActivity
+        // if no go to loginActivity
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
