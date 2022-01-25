@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface RxUserApiService {
 
-    @POST("login")
+    @POST("authentication/login")
     Observable<User> login(@Body UserAuth userAuth);
 
     @GET("users")

@@ -21,7 +21,7 @@ import com.cnam.eatudiant.view.LoginActivity;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int SPLASH_SCREEN_DELAY = 500;
+    private final int SPLASH_SCREEN_DELAY = 3000;
 
     Animation topAnim;
     Animation bottomAnim;
