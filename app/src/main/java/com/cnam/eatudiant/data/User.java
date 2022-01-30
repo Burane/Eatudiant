@@ -5,17 +5,6 @@ import lombok.Data;
 
 @Data
 public class User {
-
-    private int id;
-    private String username;
     private String token;
-    private Datas datas;
-
-
-
-}
-
-@Data
-class Datas {
-    String token;
+    private int idADH;
 }
