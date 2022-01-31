@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.intent.LoginIntent;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.rxbinding4.view.RxView;
 import com.jakewharton.rxbinding4.widget.RxTextView;
@@ -61,6 +64,10 @@ public class LoginActivity extends AppCompatActivity implements View {
     @Override
     public Map<String, Consumer> getConsumers() {
         Map<String, Consumer> consumers = new HashMap<>();
+        consumers.put("login_failed", message -> {
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), (String) message, Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        });
         return consumers;
     }
 

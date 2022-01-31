@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxUserApiService;
-import com.cnam.eatudiant.data.FakeUser;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 import lombok.Setter;
@@ -50,11 +49,6 @@ public class RegisterModel {
 //
 //        });
 
-        Observable<List<FakeUser>> fakeUser = rxUserApiService.getUser();
-
-        fakeUser.subscribe(fakeUser1 -> {
-            Log.i("eatudiant_debug", "user " + Arrays.toString(fakeUser1.toArray()));
-        });
 
 
     }

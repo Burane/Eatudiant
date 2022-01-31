@@ -9,6 +9,7 @@
         android:orientation="vertical"
         android:background="#ffff"
         android:padding="20dp"
+        android:id="@+id/root"
         >
 
     <ImageView

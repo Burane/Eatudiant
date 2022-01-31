@@ -5,7 +5,6 @@ import lombok.NonNull;
 
 @Data
 public class UserAuth {
-
-    @NonNull private String username;
+    @NonNull private String login;
     @NonNull private String password;
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowInsets;
@@ -16,12 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.cnam.eatudiant.utils.SessionManager;
 import com.cnam.eatudiant.view.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int SPLASH_SCREEN_DELAY = 500;
+    private final int SPLASH_SCREEN_DELAY = 3000;
 
     Animation topAnim;
     Animation bottomAnim;
@@ -50,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         // check if authToken is in shared pref
         // if yes login and go to homeActivity
         // if no go to loginActivity
+
+        SessionManager sessionManager = new SessionManager(this.getApplicationContext());
+        String token = sessionManager.fetchAuthToken();
+
+        Log.i("eatudiant_debug", "token : " + token);
+
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
