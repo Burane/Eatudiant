@@ -3,6 +3,7 @@ package com.cnam.eatudiant.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -64,7 +65,19 @@ public class LoginActivity extends AppCompatActivity implements View {
             if (message instanceof String)
                 loginFailed((String) message);
         });
+        consumers.put("login_success", message -> {
+            if (message instanceof String)
+                loginSuccess((String) message);
+        });
         return consumers;
+    }
+
+    private void loginSuccess(String message) {
+        Log.i("eatudiant_debug", "login : " + message);
+
+        Intent intent = new Intent(this, HomeActivity.class);
+
+        startActivity(intent);
     }
 
     @Override

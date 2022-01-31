@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.cnam.eatudiant">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
             android:usesCleartextTraffic="true"
             android:allowBackup="true"
@@ -14,14 +14,22 @@
         <activity
                 android:name=".view.LoginActivity"
                 android:exported="true"
-                android:label="@string/title_activity_login"/>
+                android:label="@string/title_activity_login"
+                />
         <activity
                 android:name=".view.RegisterActivity"
                 android:exported="true"
-                android:label="@string/title_activity_register"/>
+                android:label="@string/title_activity_register"
+                />
+        <activity
+                android:name=".view.HomeActivity"
+                android:exported="true"
+                android:label="@string/title_activity_register"
+                />
         <activity
                 android:name=".MainActivity"
-                android:exported="true">
+                android:exported="true"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
