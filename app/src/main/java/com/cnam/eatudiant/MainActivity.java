@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.utils.SessionManager;
+import com.cnam.eatudiant.view.HomeActivity;
 import com.cnam.eatudiant.view.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,7 +73,12 @@ public class MainActivity extends AppCompatActivity {
         slogan.setAnimation(bottomAnim);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent;
+            if (token == null) {
+                intent = new Intent(this, LoginActivity.class);
+            } else {
+                intent = new Intent(this, HomeActivity.class);
+            }
 
             Pair[] pairs = new Pair[2];
             pairs[0] = new Pair<View, String>(logo, "logo");

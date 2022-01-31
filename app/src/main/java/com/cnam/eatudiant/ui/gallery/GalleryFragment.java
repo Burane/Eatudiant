@@ -11,19 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.cnam.eatudiant.R;
-import com.cnam.eatudiant.databinding.FragmentGalleryBinding;
+import com.cnam.eatudiant.databinding.FragmentMapBinding;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
-    private FragmentGalleryBinding binding;
+    private FragmentMapBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
                 new ViewModelProvider(this).get(GalleryViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;

@@ -2,8 +2,7 @@ package com.cnam.eatudiant.view;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import androidx.annotation.NonNull;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,18 +15,18 @@ import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationView;
-import org.jetbrains.annotations.NotNull;
+import com.google.android.material.snackbar.Snackbar;
 
-public class HomeActivity extends AppCompatActivity /*implements NavigationView.OnNavigationItemSelectedListener*/ {
+public class HomeActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    private AppBarConfiguration barConfiguration;
 
     @BindView(R.id.drawer_layout)
-    private DrawerLayout drawer;
+    DrawerLayout drawer;
     @BindView(R.id.nav_view)
-    private NavigationView navigationView;
+    NavigationView navigationView;
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    Toolbar toolbar;
     // private ActivityHomeBinding binding;
 
     @Override
@@ -40,6 +39,7 @@ public class HomeActivity extends AppCompatActivity /*implements NavigationView.
         // setContentView(binding.getRoot());
 
         setSupportActionBar(toolbar);
+
         /*
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +49,16 @@ public class HomeActivity extends AppCompatActivity /*implements NavigationView.
             }
         });
         */
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        barConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
         )
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(this, navController, barConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
@@ -71,29 +72,7 @@ public class HomeActivity extends AppCompatActivity /*implements NavigationView.
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+        return NavigationUI.navigateUp(navController, barConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-    /*
-    @Override
-    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.activity_main_drawer_news :
-                break;
-            case R.id.activity_main_drawer_profile:
-                break;
-            case R.id.activity_main_drawer_settings:
-                break;
-            default:
-                break;
-        }
-
-        this.drawerLayout.closeDrawer(GravityCompat.START);
-
-        return true;
-    }
-    */
 }

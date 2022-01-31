@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface View {
 
-    Map<String, Observable> getActions();
+    Map<String, Observable<?>> getActions();
 
-    Map<String, Consumer> getConsumers();
+    Map<String, Consumer<Object>> getConsumers();
 
     Context getContext();
 }

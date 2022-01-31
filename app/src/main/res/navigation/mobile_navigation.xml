@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.cnam.eatudiant.ui.home.HomeFragment"
-        android:label="@string/menu_receipt"
-        tools:layout="@layout/fragment_receipt" />
+        android:name="com.cnam.eatudiant.ui.recipe.RecipeFragment"
+        android:label="@string/menu_recipe"
+        tools:layout="@layout/fragment_recipe" />
 
     <fragment
         android:id="@+id/nav_gallery"

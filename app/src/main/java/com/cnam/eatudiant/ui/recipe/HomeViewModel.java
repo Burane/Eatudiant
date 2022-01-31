@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.ui.home;
+package com.cnam.eatudiant.ui.recipe;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -16,7 +16,7 @@ import java.util.Map;
 public class RegisterModel {
 
 
-    private Map<String, Consumer> consumer;
+    private Map<String, Consumer<Object>> consumer;
 
     private RxUserApiService rxUserApiService;
     private Context context;
@@ -30,7 +30,7 @@ public class RegisterModel {
     @Setter
     private String email = "";
 
-    public RegisterModel(Map<String, Consumer> consumer, Context context) {
+    public RegisterModel(Map<String, Consumer<Object>> consumer, Context context) {
         this.consumer = consumer;
         this.context = context;
     }

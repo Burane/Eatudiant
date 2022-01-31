@@ -21,7 +21,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Eatudiant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Eatudiant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="fontFamily">@font/takeover_full</item>
+    </style>
 
     <style name="Theme.Eatudiant.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

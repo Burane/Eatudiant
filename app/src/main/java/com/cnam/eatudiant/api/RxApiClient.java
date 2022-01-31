@@ -27,4 +27,11 @@ public class RxApiClient {
         }
         return instance.retrofit.create(RxUserApiService.class);
     }
+
+    public static RxRecipesApiService getRxRecipesApiService(Context context) {
+        if (instance == null) {
+            instance = new RxApiClient(context);
+        }
+        return instance.retrofit.create(RxRecipesApiService.class);
+    }
 }
