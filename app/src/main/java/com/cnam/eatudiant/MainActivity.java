@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import butterknife.ButterKnife;
 import com.cnam.eatudiant.utils.SessionManager;
 import com.cnam.eatudiant.view.LoginActivity;
 
