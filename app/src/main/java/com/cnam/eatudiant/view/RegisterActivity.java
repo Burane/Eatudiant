@@ -61,8 +61,8 @@ public class RegisterActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public Map<String, Observable> getActions() {
-        Map<String, Observable> actions = new HashMap<>();
+    public Map<String, Observable<?>> getActions() {
+        Map<String, Observable<?>> actions = new HashMap<>();
         actions.put("registerPressed", RxView.clicks(registerButton));
         actions.put("usernameChanged", RxTextView.textChanges(username));
         actions.put("passwordChanged", RxTextView.textChanges(password));
@@ -72,8 +72,8 @@ public class RegisterActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public Map<String, Consumer> getConsumers() {
-        Map<String, Consumer> consumers = new HashMap<>();
+    public Map<String, Consumer<Object>> getConsumers() {
+        Map<String, Consumer<Object>> consumers = new HashMap<>();
         return consumers;
     }
 

@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class LoginModel {
 
-    private Map<String, Consumer> consumer;
+    private Map<String, Consumer<Object>> consumer;
 
     private RxUserApiService rxUserApiService;
     private Context context;
@@ -29,7 +29,7 @@ public class LoginModel {
     @Setter
     private String password = "";
 
-    public LoginModel(Map<String, Consumer> consumer, Context context) {
+    public LoginModel(Map<String, Consumer<Object>> consumer, Context context) {
         this.consumer = consumer;
         this.context = context;
     }

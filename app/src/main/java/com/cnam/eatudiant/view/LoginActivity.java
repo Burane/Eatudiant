@@ -3,12 +3,8 @@ package com.cnam.eatudiant.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.Button;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
@@ -53,8 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public Map<String, Observable> getActions() {
-        Map<String, Observable> actions = new HashMap<>();
+    public Map<String, Observable<?>> getActions() {
+        Map<String, Observable<?>> actions = new HashMap<>();
         actions.put("loginPressed", RxView.clicks(loginButton));
         actions.put("usernameChanged", RxTextView.textChanges(username));
         actions.put("passwordChanged", RxTextView.textChanges(password));
@@ -62,11 +58,11 @@ public class LoginActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public Map<String, Consumer> getConsumers() {
-        Map<String, Consumer> consumers = new HashMap<>();
+    public Map<String, Consumer<Object>> getConsumers() {
+        Map<String, Consumer<Object>> consumers = new HashMap<>();
         consumers.put("login_failed", message -> {
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), (String) message, Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            if (message instanceof String)
+                loginFailed((String) message);
         });
         return consumers;
     }
@@ -74,5 +70,10 @@ public class LoginActivity extends AppCompatActivity implements View {
     @Override
     public Context getContext() {
         return this.getApplicationContext();
+    }
+
+    private void loginFailed(String message) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }
