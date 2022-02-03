@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.ui.gallery;
+package com.cnam.eatudiant.ui.map;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

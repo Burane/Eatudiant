@@ -1,5 +1,7 @@
-package com.cnam.eatudiant.ui.gallery;
+package com.cnam.eatudiant.ui.map;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +10,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.databinding.FragmentMapBinding;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GalleryFragment extends Fragment {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GalleryViewModel galleryViewModel;
     private FragmentMapBinding binding;
+    private FragmentActivity contextActivity;
+    // private SupportMapFragment mapFragment;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,14 +36,27 @@ public class GalleryFragment extends Fragment {
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
+    }
+
+    /*
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity){
+            contextActivity = (Activity) context;
+        }
+
+    }*/
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(
+                new MarkerOptions()
+                        .position(new LatLng(0, 0))
+                        .title("Marker")
+        );
     }
 
     @Override
