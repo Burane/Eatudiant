@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button_goToPreviousStep"
+        android:layout_width="91dp"
+        android:layout_height="45dp"
+        android:text="Prev."
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="590dp" />
+
+    <ImageView
+        android:id="@+id/recipePicture"
+        android:layout_width="415dp"
+        android:layout_height="278dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-2dp"
+        tools:srcCompat="@drawable/app_icon" />
+
+    <EditText
+        android:id="@+id/recipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <Button
+        android:id="@+id/button_goToIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="325dp" />
+
+    <Button
+        android:id="@+id/button_goToCookware"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cookware"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="325dp" />
+
+    <EditText
+        android:id="@+id/stepNumber"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="371dp" />
+
+    <EditText
+        android:id="@+id/stepText"
+        android:layout_width="396dp"
+        android:layout_height="168dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <Button
+        android:id="@+id/button_goToNextStep"
+        android:layout_width="97dp"
+        android:layout_height="46dp"
+        android:text="Next"
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="589dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
