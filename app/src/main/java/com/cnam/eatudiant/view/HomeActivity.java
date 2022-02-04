@@ -1,7 +1,9 @@
 package com.cnam.eatudiant.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         barConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_map, R.id.nav_slideshow
         )
                 .setOpenableLayout(drawer)
                 .build();
@@ -52,6 +54,19 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.action_settings) {
+            Intent settings = new Intent(this, SettingsActivity.class);
+            // settings.
+            startActivity(settings);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

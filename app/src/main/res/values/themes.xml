@@ -24,6 +24,12 @@
     <style name="Theme.Eatudiant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="fontFamily">@font/takeover_full</item>
     </style>
+    <style name="Theme.Eatudiant.AppBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTabTextStyle">@font/takeover_full</item>
+    </style>
 
     <style name="Theme.Eatudiant.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

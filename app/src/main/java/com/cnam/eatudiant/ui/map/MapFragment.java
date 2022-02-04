@@ -35,20 +35,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        // Construct a PlacesClient
+        // Places.initialize(contextActivity.getApplicationContext()
 
         return root;
     }
 
-    /*
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof Activity){
-            contextActivity = (Activity) context;
+        if (context instanceof FragmentActivity){
+            contextActivity = (FragmentActivity) context;
         }
 
-    }*/
+    }
 
     @Override
     public void onMapReady(GoogleMap map) {

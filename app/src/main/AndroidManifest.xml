@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cnam.eatudiant">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eatudiant"
         android:usesCleartextTraffic="true">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -21,7 +20,12 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
+        <activity
+            android:name=".view.SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.Eatudiant.AppBar"
+            />
         <activity
             android:name=".view.HomeActivity"
             android:exported="true"

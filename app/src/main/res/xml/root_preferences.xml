@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+        <PreferenceCategory app:title="@string/recipe_likes">
+
+            <SwitchPreferenceCompat
+                app:key="save_like"
+                app:summaryOff="@string/save_like_summary_off"
+                app:summaryOn="@string/save_like_summary_on"
+                app:title="@string/save_like_title" />
+
+            <ListPreference
+                app:defaultValue="reply"
+                app:entries="@array/reply_entries"
+                app:entryValues="@array/reply_values"
+                app:key="reply"
+                app:title="@string/reply_title"
+                app:useSimpleSummaryProvider="true" />
+
+        </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/account">
+
+        <EditTextPreference
+            app:key="email"
+            app:title="@string/edit_email"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:key="logout"
+            app:title="@string/logout" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
