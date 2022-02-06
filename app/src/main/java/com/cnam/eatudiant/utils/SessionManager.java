@@ -18,6 +18,7 @@ public class SessionManager {
         sharedPreferences.edit()
                 .putString(USER_TOKEN, token)
                 .apply();
+
     }
 
     public String fetchAuthToken() {

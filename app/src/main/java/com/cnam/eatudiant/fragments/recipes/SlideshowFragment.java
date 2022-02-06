@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.ui.slideshow;
+package com.cnam.eatudiant.fragments.recipes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.databinding.FragmentSlideshowBinding;
 
 public class SlideshowFragment extends Fragment {

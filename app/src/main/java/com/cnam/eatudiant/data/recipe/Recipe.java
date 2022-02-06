@@ -30,4 +30,5 @@ public class Recipe {
     private int price;
 
     private int quantity;
+
 }

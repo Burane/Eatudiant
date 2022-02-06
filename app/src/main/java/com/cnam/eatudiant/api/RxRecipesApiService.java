@@ -7,12 +7,13 @@ import com.cnam.eatudiant.data.recipe.RecipesRequest;
 import com.cnam.eatudiant.data.recipe.RecipesResponse;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RxRecipesApiService {
 
-    @POST("recette/getListRecette")
-    Observable<Response<RecipesResponse>> getRecipes(@Body RecipesRequest recipesRequest);
+    @GET("recette/getListRecette")
+    Observable<Response<RecipesResponse>> getRecipes();
 
 
 }
