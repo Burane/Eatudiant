@@ -6,14 +6,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.cnam.eatudiant.R;
+import com.cnam.eatudiant.adpter.RecipeAdapter;
 import com.cnam.eatudiant.data.recipe.Recipe;
 import com.cnam.eatudiant.databinding.FragmentRecipeBinding;
 import com.cnam.eatudiant.intent.RecipeIntent;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +28,15 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
     private FragmentRecipeBinding binding;
 
+    @BindView(R.id.recipesList)
+    ListView listView;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentRecipeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        ButterKnife.bind(this, root);
 
         new RecipeIntent(this).start();
 
@@ -67,7 +77,12 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
 
     private void showRecipesList(List<Recipe> recipes) {
+
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipes);
+
+        listView.setAdapter(recipeAdapter);
         Log.i("eatudiant_debug", "showRecipesList");
+        Log.i("eatudiant_debug", Arrays.toString(recipes.toArray()));
 
     }
 
