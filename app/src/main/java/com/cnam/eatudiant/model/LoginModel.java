@@ -43,7 +43,8 @@ public class LoginModel {
 
         Observable<Response<User>> userResponse = rxUserApiService.login(new UserAuth(username, password));
 
-        userResponse.subscribe(response -> {
+        userResponse.subscribe(
+                response -> {
                     Log.i("eatudiant_debug", "user response");
                     Log.i("eatudiant_debug", "user " + response.toString());
 
@@ -62,6 +63,12 @@ public class LoginModel {
 
                 });
 
+    }
+
+    public void logout() {
+        Log.i("eatudiant_debug", "logout");
+        SessionManager sessionManager = new SessionManager(context);
+        sessionManager.removeAuthToken();
     }
 
 }

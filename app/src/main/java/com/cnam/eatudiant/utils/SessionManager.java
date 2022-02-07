@@ -14,6 +14,12 @@ public class SessionManager {
         this.sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
     }
 
+    public void removeAuthToken() {
+         sharedPreferences.edit()
+                 .remove(USER_TOKEN)
+                 .apply();
+    }
+
     public void saveAuthToken(String token) {
         sharedPreferences.edit()
                 .putString(USER_TOKEN, token)

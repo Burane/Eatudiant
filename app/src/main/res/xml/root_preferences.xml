@@ -1,21 +1,22 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-        <PreferenceCategory app:title="@string/recipe_likes">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="@string/recipe_likes">
 
-            <SwitchPreferenceCompat
-                app:key="save_like"
-                app:summaryOff="@string/save_like_summary_off"
-                app:summaryOn="@string/save_like_summary_on"
-                app:title="@string/save_like_title" />
+        <SwitchPreferenceCompat
+            app:key="save_like"
+            app:summaryOff="@string/save_like_summary_off"
+            app:summaryOn="@string/save_like_summary_on"
+            app:title="@string/save_like_title" />
 
-            <ListPreference
-                app:defaultValue="reply"
-                app:entries="@array/reply_entries"
-                app:entryValues="@array/reply_values"
-                app:key="reply"
-                app:title="@string/reply_title"
-                app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
 
-        </PreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/account">
 
@@ -25,9 +26,8 @@
             app:useSimpleSummaryProvider="true" />
 
         <Preference
-            app:key="logout"
-            app:title="@string/logout" />
-
+            android:layout="@layout/button_logout"
+            app:key="logout" />
     </PreferenceCategory>
 
 </PreferenceScreen>

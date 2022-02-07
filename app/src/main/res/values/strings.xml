@@ -38,4 +38,5 @@
     <!-- Account Preferences -->
     <string name="edit_email">Your Email</string>
     <string name="logout">Logout</string>
+    <string name="maps_api_key">${MAPS_API_KEY}</string>
 </resources>
