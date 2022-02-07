@@ -80,7 +80,6 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
     private void showRecipesList(ArrayList<Recipe> recipes) {
         Log.i("eatudiant_debug", "recipes.toArray()");
-        Log.i("eatudiant_debug", Arrays.toString(recipes.toArray()));
 
 
         RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
