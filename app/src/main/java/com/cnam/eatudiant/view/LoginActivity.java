@@ -81,6 +81,11 @@ public class LoginActivity extends AppCompatActivity implements View {
     }
 
     @Override
+    public void onBackPressed() {
+        this.finishAffinity();
+    }
+
+    @Override
     public Context getContext() {
         return this.getApplicationContext();
     }
