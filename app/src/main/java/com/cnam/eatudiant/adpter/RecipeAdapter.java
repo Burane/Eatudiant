@@ -30,8 +30,6 @@ public class RecipeAdapter extends BaseAdapter {
     public RecipeAdapter(Context context, ArrayList<Recipe> items) {
         this.context = context;
         this.items = items;
-        Log.i("eatudiant_debug", "IN LIST VIEW CONSTRUCTOR");
-
     }
 
     @Override
@@ -51,8 +49,6 @@ public class RecipeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        Log.i("eatudiant_debug", "IN LIST VIEW 1");
-
         ViewHolder holder;
 
         if (view == null) {
@@ -66,7 +62,6 @@ public class RecipeAdapter extends BaseAdapter {
 
 
         Recipe currentItem = getItem(position);
-        Log.i("eatudiant_debug", "IN LIST VIEW 2");
 
         Ion.with(holder.recipeImage).load("https://img.cuisineaz.com/610x610/2015/10/29/i88809-raclette.jpg");
         holder.recipeName.setText(currentItem.getName());

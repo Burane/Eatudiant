@@ -39,7 +39,6 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         new RecipeIntent(this).start();
 
         RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<>());
-        Log.i("eatudiant_debug", "recipeAdapter");
         listView.setAdapter(recipeAdapter);
 
 
@@ -85,8 +84,7 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
         Log.i("eatudiant_debug", "recipeAdapter");
         listView.setAdapter(recipeAdapter);
-        listView.setAdapter(recipeAdapter);
-
+        recipeAdapter.notifyDataSetChanged();
     }
 
 }
