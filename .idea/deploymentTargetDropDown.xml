@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
+    <multipleDevicesSelectedInDropDown value="true" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
             <type value="SERIAL_NUMBER" />
-            <value value="localhost:5555" />
+            <value value="192.168.0.19:37477" />
           </Key>
         </deviceKey>
       </Target>
@@ -16,7 +17,7 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\antoi\.android\avd\OP6_API_30.avd" />
+            <value value="C:\Users\antoi\.android\avd\op6_API_30.avd" />
           </Key>
         </deviceKey>
       </Target>
