@@ -16,17 +16,19 @@ import com.cnam.eatudiant.data.recipe.Recipe;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecipeAdapter extends BaseAdapter {
 
     private Context context; //context
-    private List<Recipe> items; //data source of the list adapter
+    private ArrayList<Recipe> items; //data source of the list adapter
 
-    public RecipeAdapter(Context context, List<Recipe> items) {
+    public RecipeAdapter(Context context, ArrayList<Recipe> items) {
         this.context = context;
         this.items = items;
         Log.i("eatudiant_debug", "IN LIST VIEW CONSTRUCTOR");
+        Log.i("eatudiant_debug", "recipes length " + items);
 
     }
 
@@ -52,7 +54,7 @@ public class RecipeAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (view == null) {
-            view = LayoutInflater.from(parent.getContext()).
+            view = LayoutInflater.from(context).
                     inflate(R.layout.item_recipe, parent, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
@@ -66,9 +68,9 @@ public class RecipeAdapter extends BaseAdapter {
 
         Ion.with(holder.recipeImage).load("https://img.cuisineaz.com/610x610/2015/10/29/i88809-raclette.jpg");
         holder.recipeName.setText(currentItem.getName());
-        holder.recipePrice.setText(currentItem.getPrice());
-        holder.recipeTime.setText(currentItem.getDuration());
-        holder.recipeQuantity.setText(currentItem.getQuantity());
+        holder.recipePrice.setText(String.valueOf(currentItem.getPrice()));
+        holder.recipeTime.setText(String.valueOf(currentItem.getDuration()));
+        holder.recipeQuantity.setText(String.valueOf(currentItem.getQuantity()));
 
         return view;
     }

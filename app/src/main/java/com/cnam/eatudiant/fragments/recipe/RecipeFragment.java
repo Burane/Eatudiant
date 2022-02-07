@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,10 +20,7 @@ import com.cnam.eatudiant.intent.RecipeIntent;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.View {
 
@@ -39,6 +37,10 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         ButterKnife.bind(this, root);
 
         new RecipeIntent(this).start();
+
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<>());
+        Log.i("eatudiant_debug", "recipeAdapter");
+        listView.setAdapter(recipeAdapter);
 
 
         return root;
@@ -63,7 +65,7 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         Map<String, Consumer<Object>> consumers = new HashMap<>();
         consumers.put("recipesResponse", recipes -> {
             if (recipes instanceof List) {
-                List<Recipe> recipesList = (List<Recipe>) recipes;
+                ArrayList<Recipe> recipesList = (ArrayList<Recipe>) recipes;
                 showRecipesList(recipesList);
             }
         });
@@ -76,12 +78,14 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
     }
 
 
-    private void showRecipesList(List<Recipe> recipes) {
-
-        RecipeAdapter recipeAdapter = new RecipeAdapter(this.getActivity().getBaseContext(), recipes);
-
-        listView.setAdapter(recipeAdapter);
+    private void showRecipesList(ArrayList<Recipe> recipes) {
+        Log.i("eatudiant_debug", "recipes.toArray()");
         Log.i("eatudiant_debug", Arrays.toString(recipes.toArray()));
+
+
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
+        Log.i("eatudiant_debug", "recipeAdapter");
+        listView.setAdapter(recipeAdapter);
 
     }
 
