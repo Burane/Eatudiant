@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class RegisterIntent {
 
-    private Map<String, Observable> actions;
+    private Map<String, Observable<?>> actions;
     private RegisterModel registerModel;
 
     public RegisterIntent(View registerView) {
@@ -18,7 +18,6 @@ public class RegisterIntent {
         registerModel = new RegisterModel(registerView.getConsumers(), registerView.getContext());
     }
 
-    @SuppressWarnings("unchecked")
     public void start() {
         actions.get("registerPressed").subscribe(next -> {
             registerModel.register();

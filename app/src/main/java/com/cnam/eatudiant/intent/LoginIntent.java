@@ -1,6 +1,5 @@
 package com.cnam.eatudiant.intent;
 
-import android.util.Log;
 import com.cnam.eatudiant.model.LoginModel;
 import com.cnam.eatudiant.view.View;
 import io.reactivex.rxjava3.core.Observable;
@@ -8,7 +7,7 @@ import io.reactivex.rxjava3.core.Observable;
 import java.util.Map;
 
 public class LoginIntent {
-    private Map<String, Observable> actions;
+    private Map<String, Observable<?>> actions;
     private LoginModel loginModel;
 
     public LoginIntent(View userView) {

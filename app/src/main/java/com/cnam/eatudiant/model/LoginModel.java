@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class LoginModel {
 
-    private Map<String, Consumer> consumer;
+    private Map<String, Consumer<Object>> consumer;
 
     private RxUserApiService rxUserApiService;
     private Context context;
@@ -29,7 +29,7 @@ public class LoginModel {
     @Setter
     private String password = "";
 
-    public LoginModel(Map<String, Consumer> consumer, Context context) {
+    public LoginModel(Map<String, Consumer<Object>> consumer, Context context) {
         this.consumer = consumer;
         this.context = context;
     }
@@ -44,13 +44,13 @@ public class LoginModel {
         Observable<Response<User>> userResponse = rxUserApiService.login(new UserAuth(username, password));
 
         userResponse.subscribe(response -> {
-                    Log.i("eatudiant_debug", "user resposne");
+                    Log.i("eatudiant_debug", "user response");
                     Log.i("eatudiant_debug", "user " + response.toString());
 
                     SessionManager sessionManager = new SessionManager(context);
                     sessionManager.saveAuthToken(response.getDatas().getToken());
 
-                    consumer.get("login_success").accept("");
+                    consumer.get("login_success").accept("success");
 
                 },
                 throwable -> {
