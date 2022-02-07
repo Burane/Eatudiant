@@ -17,6 +17,8 @@ import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.data.recipe.Recipe;
 import com.jakewharton.rxbinding4.view.RxView;
 import com.koushikdutta.ion.Ion;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,7 @@ import java.util.List;
 public class RecipeAdapter extends BaseAdapter {
 
     private Context context; //context
+    @Getter
     private ArrayList<Recipe> items; //data source of the list adapter
 
     public RecipeAdapter(Context context, ArrayList<Recipe> items) {

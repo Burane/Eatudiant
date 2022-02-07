@@ -25,6 +25,7 @@ import java.util.*;
 public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.View {
 
     private FragmentRecipeBinding binding;
+    private RecipeAdapter recipeAdapter;
 
     @BindView(R.id.recipesList)
     ListView listView;
@@ -38,7 +39,7 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
         new RecipeIntent(this).start();
 
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<>());
+        recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<Recipe>());
         listView.setAdapter(recipeAdapter);
 
 
@@ -78,13 +79,11 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
 
     private void showRecipesList(ArrayList<Recipe> recipes) {
-        Log.i("eatudiant_debug", "recipes.toArray()");
-
-
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
-        Log.i("eatudiant_debug", "recipeAdapter");
-        listView.setAdapter(recipeAdapter);
+        recipeAdapter.getItems().clear();
+        recipeAdapter.getItems().addAll(recipes);
         recipeAdapter.notifyDataSetChanged();
+        listView.smoothScrollToPosition(recipeAdapter.getCount()-1);
+
     }
 
 }

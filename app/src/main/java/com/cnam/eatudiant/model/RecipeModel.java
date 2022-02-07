@@ -7,6 +7,7 @@ import com.cnam.eatudiant.api.RxRecipesApiService;
 import com.cnam.eatudiant.api.RxUserApiService;
 import com.cnam.eatudiant.data.Response;
 import com.cnam.eatudiant.data.recipe.RecipesResponse;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 import retrofit2.HttpException;
@@ -34,7 +35,9 @@ public class RecipeModel {
 
         Observable<Response<RecipesResponse>> recipesResponse = rxRecipesApiService.getRecipes();
 
-        recipesResponse.subscribe(
+        recipesResponse
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
                 res -> {
                     Log.i("eatudiant_debug", res.getDatas().toString());
                     consumer.get("recipesResponse").accept(res.getDatas().getRecipes());
