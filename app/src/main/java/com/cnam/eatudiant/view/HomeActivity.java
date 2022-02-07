@@ -3,7 +3,6 @@ package com.cnam.eatudiant.view;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -14,25 +13,21 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
-import org.jetbrains.annotations.NotNull;
 
-public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
+import java.util.Objects;
+
+public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration barConfiguration;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
-    private GoogleMap map;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -40,8 +35,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private SupportMapFragment mapFragment;
-    // private ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,44 +43,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        mapFragment = (SupportMapFragment) this
-                .getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         barConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_map, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_map
         )
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
+        // NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
+        NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_home);
+        NavController navController = Objects.requireNonNull(navHost).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, barConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    private void updateLocationUI() {
-        if (map == null) {
-            return;
-        }
-        try {
-            if (locationPermissionGranted) {
-                map.setMyLocationEnabled(true);
-                map.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                map.setMyLocationEnabled(false);
-                map.getUiSettings().setMyLocationButtonEnabled(false);
-                getLocationPermission();
-            }
-        } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
-        }
-    }
-
-    private void getLocationPermission() {
+    /*
+    public void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -99,7 +72,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             );
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle item selection
         if (item.getItemId() == R.id.action_settings) {
             Intent settings = new Intent(this, SettingsActivity.class);
-            // settings.
+            // go to settings screen
             startActivity(settings);
             return true;
         }
@@ -136,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        this.updateLocationUI();
+        // this.updateLocationUI();
     }
 
     @Override
@@ -150,12 +123,4 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         return locationPermissionGranted;
     }
 
-    @Override
-    public void onMapReady(@NonNull @NotNull GoogleMap map) {
-        map.addMarker(
-                new MarkerOptions()
-                        .position(new LatLng(0, 0))
-                        .title("Marker")
-        );
-    }
 }

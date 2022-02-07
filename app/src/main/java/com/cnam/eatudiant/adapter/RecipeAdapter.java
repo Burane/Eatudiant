@@ -1,14 +1,12 @@
-package com.cnam.eatudiant.adpter;
+package com.cnam.eatudiant.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
@@ -21,8 +19,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class RecipeAdapter extends BaseAdapter {
 
