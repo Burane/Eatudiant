@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.data.recipe.Recipe;
+import com.jakewharton.rxbinding4.view.RxView;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
@@ -28,7 +31,6 @@ public class RecipeAdapter extends BaseAdapter {
         this.context = context;
         this.items = items;
         Log.i("eatudiant_debug", "IN LIST VIEW CONSTRUCTOR");
-        Log.i("eatudiant_debug", "recipes length " + items);
 
     }
 
@@ -68,14 +70,26 @@ public class RecipeAdapter extends BaseAdapter {
 
         Ion.with(holder.recipeImage).load("https://img.cuisineaz.com/610x610/2015/10/29/i88809-raclette.jpg");
         holder.recipeName.setText(currentItem.getName());
-        holder.recipePrice.setText(String.valueOf(currentItem.getPrice()));
-        holder.recipeTime.setText(String.valueOf(currentItem.getDuration()));
-        holder.recipeQuantity.setText(String.valueOf(currentItem.getQuantity()));
+
+        String preparationDuration = currentItem.getDuration() + " min";
+        String priceRange = "price: " + currentItem.getPrice() + " / 5";
+        String recipeQuantity = currentItem.getQuantity() + " people    ";
+
+        holder.recipePrice.setText(preparationDuration);
+        holder.recipeTime.setText(priceRange);
+        holder.recipeQuantity.setText(recipeQuantity);
+
+        RxView.clicks(holder.root).subscribe(click -> {
+            Log.i("eatudiant_debug", "CLICK " + currentItem.getId());
+        });
 
         return view;
     }
 
     static final class ViewHolder {
+        @BindView(R.id.root)
+        ConstraintLayout root;
+
         @BindView(R.id.recipeImage)
         ImageView recipeImage;
 
