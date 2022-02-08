@@ -2,6 +2,7 @@ package com.cnam.eatudiant.model;
 
 import android.content.Context;
 import android.util.Log;
+import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxUserApiService;
 import com.cnam.eatudiant.data.Response;
@@ -36,7 +37,7 @@ public class LoginModel {
 
     @SneakyThrows
     public void login() {
-        Log.i("eatudiant_debug", "login");
+        Log.i(Config.LOG_TAG, "login");
 
         rxUserApiService = RxApiClient.getRxApiService(context);
 
@@ -45,8 +46,8 @@ public class LoginModel {
 
         userResponse.subscribe(
                 response -> {
-                    Log.i("eatudiant_debug", "user response");
-                    Log.i("eatudiant_debug", "user " + response.toString());
+                    Log.i(Config.LOG_TAG, "user response");
+                    Log.i(Config.LOG_TAG, "user " + response.toString());
 
                     SessionManager sessionManager = new SessionManager(context);
                     sessionManager.saveAuthToken(response.getDatas().getToken());
@@ -66,7 +67,7 @@ public class LoginModel {
     }
 
     public void logout() {
-        Log.i("eatudiant_debug", "logout");
+        Log.i(Config.LOG_TAG, "logout");
         SessionManager sessionManager = new SessionManager(context);
         sessionManager.removeAuthToken();
     }

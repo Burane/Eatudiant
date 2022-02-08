@@ -1,8 +1,11 @@
 package com.cnam.eatudiant.view;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -18,7 +21,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.R;
+import com.cnam.eatudiant.fragments.map.MapFragment;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -51,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         )
                 .setOpenableLayout(drawer)
                 .build();
-        // NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_content_home);
         NavController navController = Objects.requireNonNull(navHost).getNavController();
@@ -59,20 +65,21 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    /*
     public void getLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+        Log.i(Config.LOG_TAG, "getLocationPermission");
+        if (ContextCompat.checkSelfPermission(
+                this.getApplicationContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
             locationPermissionGranted = true;
         } else {
             ActivityCompat.requestPermissions(
                     this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             );
         }
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,7 +116,25 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        // this.updateLocationUI();
+    }
+
+    @SuppressLint("MissingPermission")
+    private void updateLocationUI(GoogleMap map) {
+        if (map == null) {
+            return;
+        }
+        try {
+            if (isLocationPermissionGranted()) {
+                map.setMyLocationEnabled(true);
+                map.getUiSettings().setMyLocationButtonEnabled(true);
+            } else {
+                map.setMyLocationEnabled(false);
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+                getLocationPermission();
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
     }
 
     @Override

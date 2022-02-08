@@ -1,9 +1,9 @@
 package com.cnam.eatudiant.api;
 
 import android.content.Context;
+import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.jsonAdapter.CustomDateAdapter;
 import com.cnam.eatudiant.utils.HttpClient;
-import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import retrofit2.Retrofit;
