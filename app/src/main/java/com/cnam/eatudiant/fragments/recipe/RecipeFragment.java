@@ -83,8 +83,6 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         recipeAdapter.getItems().clear();
         recipeAdapter.getItems().addAll(recipes);
         recipeAdapter.notifyDataSetChanged();
-        listView.smoothScrollToPosition(recipeAdapter.getCount() - 1);
-
     }
 
 }

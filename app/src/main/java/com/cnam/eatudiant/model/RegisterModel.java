@@ -51,15 +51,12 @@ public class RegisterModel {
             consumer.get("passwordDontMatch").accept(context.getResources().getString(R.string.password_dont_match));
         } else {
 
-            Log.i("eatudiant_debug", "register");
 
             Observable<RegisterResponse> registerResponse = rxUserApiService.register(new RegisterBody(username, password, email));
 
             registerResponse
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(response -> {
-                                Log.i("eatudiant_debug", "register response");
-                                Log.i("eatudiant_debug", "register " + response.toString());
                                 consumer.get("registerSuccess").accept("success");
 
                             },
@@ -67,7 +64,6 @@ public class RegisterModel {
                                 if (throwable instanceof HttpException) {
                                     HttpException err = (HttpException) throwable;
                                     String errMsg = err.message().trim().equals("") ? context.getResources().getString(R.string.register_failed) : err.message().trim();
-                                    Log.i("eatudiant_debug", errMsg);
                                     consumer.get("registerError").accept(errMsg);
                                 }
 

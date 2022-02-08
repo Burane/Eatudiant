@@ -39,13 +39,11 @@ public class RecipeModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                 res -> {
-                    Log.i("eatudiant_debug", res.getDatas().toString());
                     consumer.get("recipesResponse").accept(res.getDatas().getRecipes());
                 },
                 throwable -> {
                     if (throwable instanceof HttpException) {
                         HttpException err = (HttpException) throwable;
-                        Log.i("eatudiant_debug", err.message());
                         consumer.get("login_failed").accept(err.message());
                     }
                 });

@@ -77,7 +77,6 @@ public class RecipeAdapter extends BaseAdapter {
         holder.recipeQuantity.setText(recipeQuantity);
 
         RxView.clicks(holder.root).subscribe(click -> {
-            Log.i("eatudiant_debug", "CLICK " + currentItem.getId());
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
             context.startActivity(intent);
         });

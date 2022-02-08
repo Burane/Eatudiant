@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.fragments.recipe;
+package com.cnam.eatudiant.fragments.recipeDetails;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -9,10 +9,10 @@ import com.cnam.eatudiant.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CookwareFragment#newInstance} factory method to
+ * Use the {@link RecipeStepsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CookwareFragment extends Fragment {
+public class RecipeStepsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +23,7 @@ public class CookwareFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CookwareFragment() {
+    public RecipeStepsFragment() {
         // Required empty public constructor
     }
 
@@ -33,11 +33,11 @@ public class CookwareFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment cookware.
+     * @return A new instance of fragment recipeSteps.
      */
     // TODO: Rename and change types and number of parameters
-    public static CookwareFragment newInstance(String param1, String param2) {
-        CookwareFragment fragment = new CookwareFragment();
+    public static RecipeStepsFragment newInstance(String param1, String param2) {
+        RecipeStepsFragment fragment = new RecipeStepsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,12 +52,14 @@ public class CookwareFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cookware, container, false);
+        return inflater.inflate(R.layout.fragment_recipe_steps, container, false);
     }
 }

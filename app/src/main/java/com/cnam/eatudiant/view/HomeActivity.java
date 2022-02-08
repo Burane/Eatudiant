@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
                 map.getUiSettings().setMyLocationButtonEnabled(false);
                 getLocationPermission();
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }

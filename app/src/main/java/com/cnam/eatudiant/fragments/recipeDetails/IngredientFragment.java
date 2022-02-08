@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.fragments.recipe;
+package com.cnam.eatudiant.fragments.recipeDetails;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;

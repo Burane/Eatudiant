@@ -3,17 +3,17 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.recipe.CookwareFragment">
+             tools:context=".fragments.recipeDetails.CookwareFragment">
 
     <TextView
-            android:id="@+id/slogan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/takeover_full"
-            android:text="COOKWARE"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            android:transitionName="title" />
+            android:id="@+id/tv_counter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@string/hello_blank_fragment"
+            />
 
 </FrameLayout>

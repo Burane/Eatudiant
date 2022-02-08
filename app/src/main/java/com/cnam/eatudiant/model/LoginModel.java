@@ -50,20 +50,14 @@ public class LoginModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         response -> {
-                            Log.i("eatudiant_debug", "user response");
-                            Log.i("eatudiant_debug", "user " + response.toString());
-
                             SessionManager sessionManager = new SessionManager(context);
                             sessionManager.saveAuthToken(response.getDatas().getToken());
-
                             consumer.get("login_success").accept("success");
-
                         },
                         throwable -> {
                             if (throwable instanceof HttpException) {
                                 HttpException err = (HttpException) throwable;
                                 String errMsg = err.message().trim().equals("") ? context.getResources().getString(R.string.login_failed) : err.message().trim();
-                                Log.i("eatudiant_debug", errMsg);
                                 consumer.get("login_failed").accept(errMsg);
                             }
 

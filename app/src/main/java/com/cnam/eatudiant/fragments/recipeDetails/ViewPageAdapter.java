@@ -1,24 +1,34 @@
-package com.cnam.eatudiant.fragments.recipe;
+package com.cnam.eatudiant.fragments.recipeDetails;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class ViewPager2Adapter extends FragmentStateAdapter {
+public class ViewPageAdapter extends FragmentStateAdapter {
 
     @Setter
     private ArrayList<Fragment> fragments;
 
 
-    public ViewPager2Adapter(@NonNull @NotNull FragmentActivity fragmentActivity) {
+    public ViewPageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
+    public ViewPageAdapter(@NonNull Fragment fragment) {
+        super(fragment);
+    }
+
+    public ViewPageAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
+    }
     @NonNull
     @NotNull
     @Override
