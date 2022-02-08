@@ -2,6 +2,7 @@ package com.cnam.eatudiant.model;
 
 import android.content.Context;
 import android.util.Log;
+import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxUserApiService;
 import com.cnam.eatudiant.data.Response;
@@ -9,6 +10,7 @@ import com.cnam.eatudiant.data.User;
 import com.cnam.eatudiant.data.UserAuth;
 import com.cnam.eatudiant.utils.SessionManager;
 import com.squareup.moshi.Moshi;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 import lombok.Setter;
@@ -43,25 +45,28 @@ public class LoginModel {
 
         Observable<Response<User>> userResponse = rxUserApiService.login(new UserAuth(username, password));
 
-        userResponse.subscribe(
-                response -> {
-                    Log.i("eatudiant_debug", "user response");
-                    Log.i("eatudiant_debug", "user " + response.toString());
+        userResponse
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        response -> {
+                            Log.i("eatudiant_debug", "user response");
+                            Log.i("eatudiant_debug", "user " + response.toString());
 
-                    SessionManager sessionManager = new SessionManager(context);
-                    sessionManager.saveAuthToken(response.getDatas().getToken());
+                            SessionManager sessionManager = new SessionManager(context);
+                            sessionManager.saveAuthToken(response.getDatas().getToken());
 
-                    consumer.get("login_success").accept("success");
+                            consumer.get("login_success").accept("success");
 
-                },
-                throwable -> {
-                    if (throwable instanceof HttpException) {
-                        HttpException err = (HttpException) throwable;
-                        Log.i("eatudiant_debug", err.message());
-                        consumer.get("login_failed").accept(err.message());
-                    }
+                        },
+                        throwable -> {
+                            if (throwable instanceof HttpException) {
+                                HttpException err = (HttpException) throwable;
+                                String errMsg = err.message().trim().equals("") ? context.getResources().getString(R.string.login_failed) : err.message().trim();
+                                Log.i("eatudiant_debug", errMsg);
+                                consumer.get("login_failed").accept(errMsg);
+                            }
 
-                });
+                        });
 
     }
 

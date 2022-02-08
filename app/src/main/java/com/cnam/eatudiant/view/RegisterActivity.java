@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.intent.LoginIntent;
 import com.cnam.eatudiant.intent.RegisterIntent;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.rxbinding4.view.RxView;
 import com.jakewharton.rxbinding4.widget.RxTextView;
@@ -50,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements View {
 
         new RegisterIntent(this).start();
 
-        RxView.clicks(goToLoginButton).subscribe( next -> {
+        RxView.clicks(goToLoginButton).subscribe(next -> {
             Intent intent = new Intent(this, LoginActivity.class);
 
             startActivity(intent);
@@ -74,11 +76,35 @@ public class RegisterActivity extends AppCompatActivity implements View {
     @Override
     public Map<String, Consumer<Object>> getConsumers() {
         Map<String, Consumer<Object>> consumers = new HashMap<>();
+        consumers.put("passwordDontMatch", message -> {
+            if (message instanceof String) {
+                showToast((String) message);
+            }
+        });
+        consumers.put("registerSuccess", next -> {
+            registerSuccess();
+        });
+        consumers.put("registerError", message -> {
+            if (message instanceof String) {
+                showToast((String) message);
+            }
+        });
         return consumers;
     }
 
     @Override
     public Context getContext() {
         return this.getApplicationContext();
+    }
+
+    private void registerSuccess() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showToast(String message) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }

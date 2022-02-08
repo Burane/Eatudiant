@@ -76,8 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View {
         Log.i("eatudiant_debug", "login : " + message);
 
         Intent intent = new Intent(this, HomeActivity.class);
-
         startActivity(intent);
+        finish();
     }
 
     @Override
