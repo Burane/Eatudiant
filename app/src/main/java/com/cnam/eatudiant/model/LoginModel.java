@@ -2,6 +2,7 @@ package com.cnam.eatudiant.model;
 
 import android.content.Context;
 import android.util.Log;
+import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxUserApiService;
