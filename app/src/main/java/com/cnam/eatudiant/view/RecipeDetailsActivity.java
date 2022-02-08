@@ -14,6 +14,7 @@ import com.cnam.eatudiant.data.recipeDetails.Steps;
 import com.cnam.eatudiant.fragments.recipeDetails.CookwareFragment;
 import com.cnam.eatudiant.adapter.ViewPageAdapter;
 import com.cnam.eatudiant.fragments.recipeDetails.IngredientFragment;
+import com.cnam.eatudiant.fragments.recipeDetails.RecipeStepsFragment;
 import com.cnam.eatudiant.intent.RecipeDetailsIntent;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -77,8 +78,9 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View {
         consumers.put("recipeStepsResponse", steps -> {
             if (steps instanceof Steps) {
                 Steps steps1 = (Steps) steps;
-                Log.i("eatudiant_debug", "recipeStepsResponse");
-
+                fragmentList.set(1, RecipeStepsFragment.newInstance(steps1.getSteps()));
+                viewPageAdapter.setFragments(fragmentList);
+                viewPager2.setAdapter(viewPageAdapter);
             }
         });
         consumers.put("fullRecipeResponse", fullRecipe -> {

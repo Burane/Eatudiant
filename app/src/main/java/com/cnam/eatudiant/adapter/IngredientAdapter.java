@@ -55,7 +55,7 @@ public class IngredientAdapter extends BaseAdapter {
 
 
         Requirement currentItem = getItem(position);
-        String qteStr = "Quantity: " + currentItem.getQuantity();
+        String qteStr = "" + currentItem.getQuantity();
 
         holder.ingredientName.setText(currentItem.getName());
         holder.ingredientQty.setText(qteStr);

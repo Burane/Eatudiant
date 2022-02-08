@@ -55,7 +55,7 @@ public class CookwareAdapter extends BaseAdapter {
 
 
         Requirement currentItem = getItem(position);
-        String qteStr = "Quantity: " + currentItem.getQuantity();
+        String qteStr = "" + currentItem.getQuantity();
 
         holder.cookwareName.setText(currentItem.getName());
         holder.cookwareQty.setText(qteStr);
