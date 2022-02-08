@@ -1,6 +1,7 @@
 package com.cnam.eatudiant.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.data.recipe.Recipe;
+import com.cnam.eatudiant.view.RecipeDetailsActivity;
+import com.cnam.eatudiant.view.RegisterActivity;
 import com.jakewharton.rxbinding4.view.RxView;
 import com.koushikdutta.ion.Ion;
 import lombok.Getter;
@@ -75,6 +78,8 @@ public class RecipeAdapter extends BaseAdapter {
 
         RxView.clicks(holder.root).subscribe(click -> {
             Log.i("eatudiant_debug", "CLICK " + currentItem.getId());
+            Intent intent = new Intent(context, RecipeDetailsActivity.class);
+            context.startActivity(intent);
         });
 
         return view;

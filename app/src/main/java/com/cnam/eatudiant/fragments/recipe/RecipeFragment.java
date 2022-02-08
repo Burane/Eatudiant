@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.adapter.RecipeAdapter;
 import com.cnam.eatudiant.data.recipe.Recipe;
@@ -38,7 +39,8 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
 
         new RecipeIntent(this).start();
 
-        recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<Recipe>());
+        recipeAdapter = new RecipeAdapter(getActivity(), new ArrayList<>());
+        Log.d(Config.LOG_TAG, recipeAdapter.toString());
         listView.setAdapter(recipeAdapter);
 
 
@@ -81,7 +83,7 @@ public class RecipeFragment extends Fragment implements com.cnam.eatudiant.view.
         recipeAdapter.getItems().clear();
         recipeAdapter.getItems().addAll(recipes);
         recipeAdapter.notifyDataSetChanged();
-        listView.smoothScrollToPosition(recipeAdapter.getCount()-1);
+        listView.smoothScrollToPosition(recipeAdapter.getCount() - 1);
 
     }
 

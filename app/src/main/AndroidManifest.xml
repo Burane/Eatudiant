@@ -51,6 +51,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             />
         <activity
+                android:name=".view.RecipeDetailsActivity"
+                android:exported="true"
+                android:label="@string/title_activity_recipe_details"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
