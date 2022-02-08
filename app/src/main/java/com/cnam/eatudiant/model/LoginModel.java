@@ -38,7 +38,7 @@ public class LoginModel {
 
     @SneakyThrows
     public void login() {
-        Log.i("eatudiant_debug", "login");
+        Log.i(Config.LOG_TAG, "login");
 
         rxUserApiService = RxApiClient.getRxApiService(context);
 
@@ -71,7 +71,7 @@ public class LoginModel {
     }
 
     public void logout() {
-        Log.i("eatudiant_debug", "logout");
+        Log.i(Config.LOG_TAG, "logout");
         SessionManager sessionManager = new SessionManager(context);
         sessionManager.removeAuthToken();
     }
