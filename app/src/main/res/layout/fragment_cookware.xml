@@ -15,7 +15,8 @@
         android:text="cookware"
         android:textColor="@color/black"
         android:textSize="40sp"
-        android:transitionName="title" />
+        android:transitionName="title"
+        android:translationY="10" />
 
     <ListView
         android:id="@+id/cookwareList"
