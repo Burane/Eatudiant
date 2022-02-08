@@ -1,14 +1,11 @@
 package com.cnam.eatudiant.model;
 
 import android.content.Context;
-import android.util.Log;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxUserApiService;
-import com.cnam.eatudiant.data.RegisterBody;
-import com.cnam.eatudiant.data.RegisterResponse;
-import com.cnam.eatudiant.data.Response;
-import com.cnam.eatudiant.utils.SessionManager;
+import com.cnam.eatudiant.data.register.RegisterBody;
+import com.cnam.eatudiant.data.register.RegisterResponse;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -16,8 +13,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import retrofit2.HttpException;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class RegisterModel {

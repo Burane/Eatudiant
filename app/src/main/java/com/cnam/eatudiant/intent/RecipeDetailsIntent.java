@@ -1,5 +1,6 @@
 package com.cnam.eatudiant.intent;
 
+import android.util.Log;
 import com.cnam.eatudiant.model.RecipeDetailsModel;
 import com.cnam.eatudiant.model.RecipeModel;
 import com.cnam.eatudiant.view.View;

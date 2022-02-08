@@ -1,12 +1,12 @@
-package com.cnam.eatudiant.data;
+package com.cnam.eatudiant.data.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
-public class RegisterBody {
+public class UserAuth {
     private String login;
     private String password;
-    private String mail;
 }

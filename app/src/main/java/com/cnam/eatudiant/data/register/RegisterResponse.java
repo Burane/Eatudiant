@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.data;
+package com.cnam.eatudiant.data.register;
 
 import com.cnam.eatudiant.Exception.ApiException;
 import lombok.Getter;

@@ -2,6 +2,7 @@ package com.cnam.eatudiant.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,9 @@ public class RecipeAdapter extends BaseAdapter {
 
         RxView.clicks(holder.root).subscribe(click -> {
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("recipeId", currentItem.getId());
+            intent.putExtras(bundle);
             context.startActivity(intent);
         });
 

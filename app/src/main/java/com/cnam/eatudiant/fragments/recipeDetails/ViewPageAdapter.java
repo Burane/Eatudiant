@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ViewPageAdapter extends FragmentStateAdapter {
 
+    @Getter
     @Setter
     private ArrayList<Fragment> fragments;
 

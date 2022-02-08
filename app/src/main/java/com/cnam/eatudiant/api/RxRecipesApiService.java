@@ -14,10 +14,10 @@ public interface RxRecipesApiService {
     @POST("recette/getListRecette")
     Observable<Response<RecipesResponse>> getRecipes();
 
-    @POST("/recette/getRecette")
+    @POST("recette/getRecette")
     Observable<Response<FullRecipe>> getFullRecipe(@Body StepBody stepBody);
 
-    @POST("/recette/getEtapesRecette")
+    @POST("recette/getEtapesRecette")
     Observable<Response<Steps>> getRecipeSteps(@Body StepBody stepBody);
 
 }

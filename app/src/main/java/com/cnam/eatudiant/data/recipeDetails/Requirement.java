@@ -13,5 +13,5 @@ public class Requirement {
     private String name;
 
     @Json(name = "qte")
-    private int quantity;
+    private double quantity;
 }

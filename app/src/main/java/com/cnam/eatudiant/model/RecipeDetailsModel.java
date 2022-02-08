@@ -1,6 +1,7 @@
 package com.cnam.eatudiant.model;
 
 import android.content.Context;
+import android.util.Log;
 import com.cnam.eatudiant.api.RxApiClient;
 import com.cnam.eatudiant.api.RxRecipesApiService;
 import com.cnam.eatudiant.data.Response;
