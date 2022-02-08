@@ -44,4 +44,6 @@
     <string name="password_dont_match">Passwords don\'t match each other</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_marker_title">Marker</string>
+    <string name="pick_place">Pick a place to list</string>
 </resources>
