@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class StepsResponse {
+public class Steps {
 
     @Json(name = "result")
     private List<Step> steps;

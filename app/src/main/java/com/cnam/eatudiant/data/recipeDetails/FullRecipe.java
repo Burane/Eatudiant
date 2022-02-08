@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Fullrecipe {
+public class FullRecipe {
 
     private String name;
 
