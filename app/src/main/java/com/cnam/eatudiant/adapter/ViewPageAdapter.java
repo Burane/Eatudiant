@@ -1,4 +1,4 @@
-package com.cnam.eatudiant.fragments.recipeDetails;
+package com.cnam.eatudiant.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

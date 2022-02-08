@@ -3,28 +3,22 @@ package com.cnam.eatudiant.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cnam.eatudiant.R;
-import com.cnam.eatudiant.data.recipe.Recipe;
 import com.cnam.eatudiant.data.recipeDetails.FullRecipe;
 import com.cnam.eatudiant.data.recipeDetails.Steps;
-import com.cnam.eatudiant.fragments.recipe.*;
 import com.cnam.eatudiant.fragments.recipeDetails.CookwareFragment;
-import com.cnam.eatudiant.fragments.recipeDetails.IngredientFragment;
-import com.cnam.eatudiant.fragments.recipeDetails.ViewPageAdapter;
-import com.cnam.eatudiant.intent.LoginIntent;
+import com.cnam.eatudiant.adapter.ViewPageAdapter;
 import com.cnam.eatudiant.intent.RecipeDetailsIntent;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -91,7 +85,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View {
                 FullRecipe fullRecipe1 = (FullRecipe) fullRecipe;
                 Log.i("eatudiant_debug", "fullRecipeResponse");
 
-                fragmentList.set(0, CookwareFragment.newInstance(0));
+                fragmentList.set(0, CookwareFragment.newInstance(fullRecipe1.getCookware()));
                 viewPageAdapter.setFragments(fragmentList);
                 viewPager2.setAdapter(viewPageAdapter);
             }
