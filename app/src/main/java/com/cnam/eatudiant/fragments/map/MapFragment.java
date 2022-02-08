@@ -2,6 +2,7 @@ package com.cnam.eatudiant.fragments.map;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +12,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.cnam.eatudiant.BuildConfig;
 import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.databinding.FragmentMapBinding;
 import com.cnam.eatudiant.view.HomeActivity;
+import com.cnam.eatudiant.view.RegisterActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,6 +36,8 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jakewharton.rxbinding4.view.RxView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -41,6 +47,10 @@ import java.util.concurrent.Executor;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final int DEFAULT_ZOOM = 15;
     private static final int M_MAX_ENTRIES = 5;
+
+    @BindView(R.id.places_button)
+    FloatingActionButton placesButton;
+
     private FragmentMapBinding binding;
     private GoogleMap map;
     private final LatLng defaultLocation = new LatLng(49.258329, 4.031696);
@@ -58,6 +68,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        ButterKnife.bind(this, root);
 
         mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -74,6 +85,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         // Create a new PlacesClient instance
         placesClient = Places.createClient(this.requireContext());
+
+        // handle click on places button
+        placesButton.setOnClickListener(view -> {
+            Log.i(Config.LOG_TAG, "places_clicked");
+            this.showCurrentPlace();
+        });
+
+         /*
+        RxView.clicks(placesButton).subscribe(next -> {
+            showCurrentPlace();
+        });*/
 
         return root;
     }
@@ -155,7 +177,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             }
                         } else {
                             Log.d(Config.LOG_TAG, "Current location is null. Using defaults.");
-                            Log.e(Config.LOG_TAG, "Exception: %s", task.getException());
+                            Log.e(Config.LOG_TAG, "exception", task.getException());
                             map.moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(defaultLocation, DEFAULT_ZOOM)
                             );
@@ -165,7 +187,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 });
             }
         } catch (SecurityException e)  {
-            Log.e(Config.LOG_TAG, "Exception: %s ", e);
+            Log.e(Config.LOG_TAG, "Exception: " + e.getMessage(), e);
         }
     }
 

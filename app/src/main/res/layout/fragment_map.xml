@@ -15,6 +15,7 @@
         tools:context=".fragments.map.MapFragment" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        tools:context=".fragments.map.MapFragment"
         android:id="@+id/places_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
