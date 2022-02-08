@@ -14,8 +14,7 @@
         android:text="INGREDIENT"
         android:textColor="@color/black"
         android:textSize="40sp"
-        android:transitionName="title"
-        android:translationX="10" />
+        android:transitionName="title"/>
 
     <ListView
         android:id="@+id/ingredientList"
