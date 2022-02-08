@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:node="remove" />
 
     <application
@@ -23,44 +24,37 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
         <activity
             android:name=".view.SettingsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.Eatudiant.AppBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            />
+            android:theme="@style/Theme.Eatudiant.AppBar" />
         <activity
             android:name=".view.HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.Eatudiant.NoActionBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            />
+            android:theme="@style/Theme.Eatudiant.NoActionBar" />
         <activity
             android:name=".view.LoginActivity"
-            android:exported="true"
-            android:label="@string/title_activity_login"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            />
+            android:exported="true"
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".view.RegisterActivity"
-            android:exported="true"
-            android:label="@string/title_activity_register"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            />
+            android:exported="true"
+            android:label="@string/title_activity_register" />
         <activity
-                android:name=".view.RecipeDetailsActivity"
-                android:exported="true"
-                android:label="@string/title_activity_recipe_details"
-                android:configChanges="keyboardHidden|orientation|screenSize"
-                />
+            android:name=".view.RecipeDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_recipe_details" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
