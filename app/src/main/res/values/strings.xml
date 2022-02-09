@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Eatudiant</string>
+    <string name="app_name" translatable="false">Eatudiant</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -48,5 +48,24 @@
     <string name="pick_place">Pick a place to list</string>
     <string name="price_word">price</string>
     <string name="people_word">people</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="hello_there_welcome_back">Hello there, Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="password">Password</string>
+    <string name="login">login</string>
+    <string name="new_user">New user ?</string>
+    <string name="the_hottest_recipes_near_you_lt_3"><![CDATA[the hottest recipes near you <3]]></string>
+    <string name="hello_welcome">hello, welcome</string>
+    <string name="sign_up_to_continue">Sign up to continue</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="cookware">cookware</string>
+    <string name="ingredient">INGREDIENT</string>
+    <string name="recipes_list">Recipes list</string>
+    <string name="recipe_steps">RECIPE STEPS</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev.</string>
 
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pick_place">Choisissez un lieu</string>
+    <string name="price_word">prix</string>
+    <string name="people_word">personnes</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Connecte-toi ou inscris-toi</string>
+    <string name="action_sign_in_short">se connecter</string>
+    <string name="welcome">bonjour!</string>
+    <string name="invalid_username">pseudo non-valide</string>
+    <string name="invalid_password">le mot de passe doit faire au moins 5 caracteres</string>
+    <string name="login_failed">echec de connexion</string>
+    <string name="register_failed">echec d\'inscription</string>
+    <string name="go_to_sign_in">s\'inscrire</string>
+    <string name="action_settings">parametres</string>
+    <string name="menu_recipe">recette</string>
+    <string name="menu_map">carte</string>
+    <string name="recipe_likes">recettes kiffées</string>
+    <string name="account">compte</string>
+    <string name="save_like_title">sauvegarder kiff</string>
+    <string name="logout">se deconnecter</string>
+    <string name="save_like_summary_on">garder ses kiff localement</string>
+    <string name="save_like_summary_off">sauvegarder ses kiffs automatiquement</string>
+    <string name="edit_email">ton mail</string>
+    <string name="password_dont_match">les mots de passes sont differents</string>
+    <string name="hello_there_welcome_back">"Ravi de te revoir! "</string>
+    <string name="sign_in_to_continue">Connecte-toi pour continuer</string>
+    <string name="login">pseudo</string>
+    <string name="new_user">Nouvel utilisateur</string>
+    <string name="the_hottest_recipes_near_you_lt_3"><![CDATA[Les recettes les plus chaudes de ta region <3]]></string>
+    <string name="hello_welcome">bonjour, bienvenue</string>
+    <string name="sign_up_to_continue">s\'inscrire pour continuer</string>
+    <string name="username">pseudo</string>
+    <string name="password">Mot de passe</string>
+    <string name="confirm_password">confirmer le mot de passe</string>
+    <string name="already_have_an_account">Deja un compte?</string>
+    <string name="sign_up">S\'inscrire?</string>
+    <string name="cookware">ustensiles</string>
+    <string name="ingredient">INGREDIENT</string>
+    <string name="recipes_list">recettes</string>
+    <string name="recipe_steps">etapes</string>
+    <string name="next">Suiv.</string>
+    <string name="prev">Prev.</string>
+</resources>

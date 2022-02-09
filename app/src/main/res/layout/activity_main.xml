@@ -40,7 +40,7 @@
             android:transitionName="title"/>
 
     <TextView
-            android:text="the hottest recipes near you &lt;3"
+            android:text="@string/the_hottest_recipes_near_you_lt_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/slogan"
