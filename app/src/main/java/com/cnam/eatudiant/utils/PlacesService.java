@@ -11,10 +11,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.*;
 import org.jetbrains.annotations.NotNull;
@@ -158,8 +160,48 @@ public class PlacesService {
         return place[0];
     }
 
-    @NotNull
-    private LatLng getLastLocLatLng() {
-        return new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+    @SuppressLint("MissingPermission")
+    public Place[] getCurrentPlaces(List<Place.Field> placeFields) {
+        Log.i(Config.LOG_TAG, "getCurrentPlaces");
+        final Place[][] places = new Place[1][1];
+
+        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
+
+        Task<FindCurrentPlaceResponse> placeResult =
+                placesClient.findCurrentPlace(request);
+
+        placeResult.addOnCompleteListener (task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                Log.i(Config.LOG_TAG, "getCurrentPlaces : " + "places fetched");
+                FindCurrentPlaceResponse likelyPlaces = task.getResult();
+
+                // Set the count, handling cases where less than 5 entries are returned.
+                int count = Math.min(likelyPlaces.getPlaceLikelihoods().size(), M_MAX_ENTRIES);
+                places[0] = new Place[count];
+                int i = 0;
+
+                for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
+                    // Build a list of likely places to show the user.
+                    places[0][i] = placeLikelihood.getPlace();
+
+                    i++;
+                    if (i > (count - 1)) {
+                        break;
+                    }
+                }
+            }
+            else {
+                Log.e(Config.LOG_TAG, "Exception: %s", task.getException());
+            }
+        });
+
+        return places[0];
+    }
+
+    public LatLng getLastLocLatLng() {
+        if (lastKnownLocation != null) {
+            return new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+        }
+        return null;
     }
 }

@@ -109,16 +109,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap map) {
         this.map = map;
         this.placesService = new PlacesService(getHomeActivity(), map);
+        placesService.refreshLastKnownLocation();
         map.addMarker(
                 new MarkerOptions()
                         .position(placesService.getDefaultLocation())
-                        .title("Marker")
+                        .title("Position")
         );
         getHomeActivity().getLocationPermission();
         // Turn on the MyLocation layer and the related control on the map.
         updateLocationUI(map);
         // Get the current location of the device and set the position of the map.
-        placesService.refreshLastKnownLocation();
     }
 
     @SuppressLint("MissingPermission")
@@ -189,6 +189,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             List<TypeFilter> placeFilters = Collections.singletonList(TypeFilter.ESTABLISHMENT);
 
             Place[] places = placesService.getPlacesWithTypeFilter(placeFilters, placeFields);
+            // Place[] places = placesService.getCurrentPlaces(placeFields);
             Log.d(Config.LOG_TAG, "places_array : " + Arrays.toString(places));
             openPlacesDialog(
                     places
