@@ -46,4 +46,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_marker_title">Marker</string>
     <string name="pick_place">Pick a place to list</string>
+    <string name="price_word">price</string>
+    <string name="people_word">people</string>
+
 </resources>

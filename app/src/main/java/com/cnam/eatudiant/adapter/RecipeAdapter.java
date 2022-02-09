@@ -66,12 +66,14 @@ public class RecipeAdapter extends BaseAdapter {
 
         Recipe currentItem = getItem(position);
 
+
+        // should use src link properties from api but not implemented yet so this is a placeholder
         Ion.with(holder.recipeImage).load("https://img.cuisineaz.com/610x610/2015/10/29/i88809-raclette.jpg");
         holder.recipeName.setText(currentItem.getName());
 
         String preparationDuration = currentItem.getDuration() + " min";
-        String priceRange = "price: " + currentItem.getPrice() + " / 5";
-        String recipeQuantity = currentItem.getQuantity() + " people    ";
+        String priceRange = context.getResources().getString(R.string.price_word) + ": " + currentItem.getPrice() + " / 5";
+        String recipeQuantity = currentItem.getQuantity() + " " + context.getResources().getString(R.string.people_word);
 
         holder.recipePrice.setText(preparationDuration);
         holder.recipeTime.setText(priceRange);
