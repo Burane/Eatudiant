@@ -138,11 +138,14 @@ public class PlacesService {
 
         FindAutocompletePredictionsRequest predictionsRequest = requestBuilder.build();
 
+        Log.i(Config.LOG_TAG, "getPlacesWithTypeFilter_request");
         // Get the likely places - that is, the businesses and other points of interest that
         // are the best match for the device's current location.
         Task<FindAutocompletePredictionsResponse> placeResult =
                 placesClient.findAutocompletePredictions(predictionsRequest);
+        Log.i(Config.LOG_TAG, "getPlacesWithTypeFilter_response");
         placeResult.addOnCompleteListener(task -> {
+            Log.i(Config.LOG_TAG, "TASK : " + task.toString());
             if (task.isSuccessful() && task.getResult() != null) {
                 Log.i(Config.LOG_TAG, "getPlacesWithTypeFilter : " + "places fetched");
                 List<AutocompletePrediction> likelyPlaces = task.getResult().getAutocompletePredictions();
