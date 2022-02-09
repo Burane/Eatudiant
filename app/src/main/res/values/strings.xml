@@ -67,5 +67,7 @@
     <string name="recipe_steps">RECIPE STEPS</string>
     <string name="next">Next</string>
     <string name="prev">Prev.</string>
+    <string name="sign_in">Login</string>
+
 
 </resources>

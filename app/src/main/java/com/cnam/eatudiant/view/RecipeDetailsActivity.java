@@ -32,7 +32,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View {
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
-    private ArrayList<String> titles = new ArrayList<>(Arrays.asList("Cookware", "Steps", "Ingredients"));
+    private ArrayList<String> titles;
     private ViewPageAdapter viewPageAdapter;
     private ArrayList<Fragment> fragmentList;
 
@@ -47,6 +47,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View {
         Bundle bundle = getIntent().getExtras();
         recipeId = bundle.getInt("recipeId");
 
+        titles = new ArrayList<>(Arrays.asList(
+                getContext().getResources().getString(R.string.cookware),
+                getContext().getResources().getString(R.string.recipe_steps),
+                getContext().getResources().getString(R.string.ingredients)));
 
         new RecipeDetailsIntent(this).start();
 
