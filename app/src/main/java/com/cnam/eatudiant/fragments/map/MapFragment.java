@@ -18,6 +18,7 @@ import com.cnam.eatudiant.BuildConfig;
 import com.cnam.eatudiant.Config;
 import com.cnam.eatudiant.R;
 import com.cnam.eatudiant.databinding.FragmentMapBinding;
+import com.cnam.eatudiant.utils.PlacesService;
 import com.cnam.eatudiant.view.HomeActivity;
 import com.cnam.eatudiant.view.RegisterActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,48 +32,47 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
-import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.api.net.*;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jakewharton.rxbinding4.view.RxView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-    private static final int DEFAULT_ZOOM = 15;
-    private static final int M_MAX_ENTRIES = 5;
+
+    private String[] likelyPlaceNames;
+    private String[] likelyPlaceAddresses;
+    private List[] likelyPlaceAttributions;
+    private LatLng[] likelyPlaceLatLngs;
+    private GoogleMap map;
 
     @BindView(R.id.places_button)
     FloatingActionButton placesButton;
 
     private FragmentMapBinding binding;
-    private GoogleMap map;
     private final LatLng defaultLocation = new LatLng(49.258329, 4.031696);
-    PlacesClient placesClient;
+    private PlacesClient placesClient;
+    private PlacesService placesService;
     private SupportMapFragment mapFragment;
     private Location lastKnownLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private String[] likelyPlaceNames;
-    private String[] likelyPlaceAddresses;
-    private List[] likelyPlaceAttributions;
-    private LatLng[] likelyPlaceLatLngs;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ButterKnife.bind(this, root);
 
         mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
-        // assert mapFragment != null;
         if (mapFragment != null) {
             Log.i(Config.LOG_TAG, "mapFragment not null");
             mapFragment.getMapAsync(this);
@@ -92,11 +92,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             this.showCurrentPlace();
         });
 
-         /*
-        RxView.clicks(placesButton).subscribe(next -> {
-            showCurrentPlace();
-        });*/
-
         return root;
     }
 
@@ -111,18 +106,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(@NonNull @NotNull GoogleMap map) {
+    public void onMapReady(@NonNull GoogleMap map) {
         this.map = map;
+        this.placesService = new PlacesService(getHomeActivity(), map);
         map.addMarker(
                 new MarkerOptions()
-                        .position(new LatLng(0, 0))
+                        .position(placesService.getDefaultLocation())
                         .title("Marker")
         );
         getHomeActivity().getLocationPermission();
         // Turn on the MyLocation layer and the related control on the map.
         updateLocationUI(map);
         // Get the current location of the device and set the position of the map.
-        getDeviceLocation(map);
+        placesService.refreshLastKnownLocation();
     }
 
     @SuppressLint("MissingPermission")
@@ -146,77 +142,35 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
-    @SuppressLint("MissingPermission")
-    private void getDeviceLocation(GoogleMap map) {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
-        Log.i(Config.LOG_TAG, "getDeviceLocation");
-        try {
-            if (getHomeActivity().isLocationPermissionGranted()) {
-                Log.i(Config.LOG_TAG, "getDeviceLocation_location_granted");
-                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(requireActivity(), new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
-                            lastKnownLocation = task.getResult();
-                            if (lastKnownLocation != null) {
-                                map.moveCamera(
-                                        CameraUpdateFactory.newLatLngZoom(
-                                                new LatLng(
-                                                        lastKnownLocation.getLatitude(),
-                                                        lastKnownLocation.getLongitude()
-                                                ),
-                                                DEFAULT_ZOOM
-                                        )
-                                );
-                            }
-                        } else {
-                            Log.d(Config.LOG_TAG, "Current location is null. Using defaults.");
-                            Log.e(Config.LOG_TAG, "exception", task.getException());
-                            map.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(defaultLocation, DEFAULT_ZOOM)
-                            );
-                            map.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                    }
-                });
-            }
-        } catch (SecurityException e)  {
-            Log.e(Config.LOG_TAG, "Exception: " + e.getMessage(), e);
-        }
-    }
-
-    private void openPlacesDialog() {
+    private void openPlacesDialog(Place[] places) {
         // Ask the user to choose the place where they are now.
         DialogInterface.OnClickListener listener = (dialog, which) -> {
             // The "which" argument contains the position of the selected item.
-            LatLng markerLatLng = likelyPlaceLatLngs[which];
-            String markerSnippet = likelyPlaceAddresses[which];
+            LatLng markerLatLng = places[which].getLatLng();
+            String markerSnippet = places[which].getAddress();
             if (likelyPlaceAttributions[which] != null) {
-                markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
+                markerSnippet = markerSnippet + "\n" + places[which].getAttributions();
             }
 
             // Add a marker for the selected place, with an info window
             // showing information about that place.
             map.addMarker(new MarkerOptions()
-                    .title(likelyPlaceNames[which])
+                    .title(places[which].getName())
                     .position(markerLatLng)
                     .snippet(markerSnippet));
 
             // Position the map's camera at the location of the marker.
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
-                    DEFAULT_ZOOM));
+                    PlacesService.DEFAULT_ZOOM));
         };
-
+        String[] names = (String[]) Arrays
+                .stream(places)
+                .map(Place::getName)
+                .toArray();
         // Display the dialog.
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.pick_place)
-                .setItems(likelyPlaceNames, listener)
+                .setItems(names, listener)
                 .show();
     }
 
@@ -228,59 +182,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         if (getHomeActivity().isLocationPermissionGranted()) {
             // Use fields to define the data types to return.
-            List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,
-                    Place.Field.LAT_LNG);
-            // Use the builder to create a FindCurrentPlaceRequest.
-            FindCurrentPlaceRequest request =
-                    FindCurrentPlaceRequest.newInstance(placeFields);
+            List<Place.Field> placeFields = Arrays.asList(
+                    Place.Field.NAME, Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG, Place.Field.TYPES
+            );
+            List<TypeFilter> placeFilters = Collections.singletonList(TypeFilter.ESTABLISHMENT);
 
-            // Get the likely places - that is, the businesses and other points of interest that
-            // are the best match for the device's current location.
-            @SuppressWarnings("MissingPermission") final
-            Task<FindCurrentPlaceResponse> placeResult =
-                    placesClient.findCurrentPlace(request);
-            placeResult.addOnCompleteListener (new OnCompleteListener<FindCurrentPlaceResponse>() {
-                @Override
-                public void onComplete(@NonNull Task<FindCurrentPlaceResponse> task) {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        FindCurrentPlaceResponse likelyPlaces = task.getResult();
-
-                        // Set the count, handling cases where less than 5 entries are returned.
-                        int count;
-                        if (likelyPlaces.getPlaceLikelihoods().size() < M_MAX_ENTRIES) {
-                            count = likelyPlaces.getPlaceLikelihoods().size();
-                        } else {
-                            count = M_MAX_ENTRIES;
-                        }
-
-                        int i = 0;
-                        likelyPlaceNames = new String[count];
-                        likelyPlaceAddresses = new String[count];
-                        likelyPlaceAttributions = new List[count];
-                        likelyPlaceLatLngs = new LatLng[count];
-
-                        for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
-                            // Build a list of likely places to show the user.
-                            likelyPlaceNames[i] = placeLikelihood.getPlace().getName();
-                            likelyPlaceAddresses[i] = placeLikelihood.getPlace().getAddress();
-                            likelyPlaceAttributions[i] = placeLikelihood.getPlace().getAttributions();
-                            likelyPlaceLatLngs[i] = placeLikelihood.getPlace().getLatLng();
-
-                            i++;
-                            if (i > (count - 1)) {
-                                break;
-                            }
-                        }
-
-                        // Show a dialog offering the user the list of likely places, and add a
-                        // marker at the selected place.
-                        openPlacesDialog();
-                    }
-                    else {
-                        Log.e(Config.LOG_TAG, "Exception: %s", task.getException());
-                    }
-                }
-            });
+            Place[] places = placesService.getPlacesWithTypeFilter(placeFilters, placeFields);
+            Log.d(Config.LOG_TAG, "places_array : " + Arrays.toString(places));
+            openPlacesDialog(
+                    places
+            );
         } else {
             // The user has not granted permission.
             Log.i(Config.LOG_TAG, "The user did not grant location permission.");
