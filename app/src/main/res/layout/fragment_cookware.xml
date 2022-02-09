@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/takeover_full"
-            android:text="cookware"
+            android:text="@string/cookware"
             android:textColor="@color/black"
             android:textSize="40sp"
             android:transitionName="title"
