@@ -23,11 +23,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Eatudiant.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
+    <style name="Theme.Eatudiant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="fontFamily">@font/takeover_full</item>
     </style>
-    <style name="Theme.Eatudiant.AppBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.Eatudiant.AppBar" parent="Theme.AppCompat.Light">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary</item>
